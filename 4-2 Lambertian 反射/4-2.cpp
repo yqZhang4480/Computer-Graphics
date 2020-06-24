@@ -105,13 +105,19 @@ public:
             bl_kc = b * l - k * c;
         float M = a * ei_hf + b * gf_di + c * dh_eg;
 
-        float beta = (j * ei_hf + k * gf_di + l * dh_eg) / M,
-            gamma = (i * ak_jb + h * jc_al + g * bl_kc) / M;
         rec = (f * ak_jb + e * jc_al + d * bl_kc) / M;
-
-        return (rec < t2&& rec > t1
-            && beta > 0 && gamma > 0
-            && beta + gamma < 1);
+        if (rec > t2 || rec < t1) {
+            return false;
+        }
+        float beta = (j * ei_hf + k * gf_di + l * dh_eg) / M;
+        if (beta < 0 || beta > 1) {
+            return false;
+        }
+        float gamma = (i * ak_jb + h * jc_al + g * bl_kc) / M;
+        if (gamma < 0 || gamma > 1 - beta) {
+            return false;
+        }
+        return true;
     }
 };
 
