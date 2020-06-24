@@ -14,8 +14,8 @@
  * 4    光线追踪
  * 4-2  Lambertian 反射
  *
- * 演示Lambertian 反射，
- * 在4-1的基础上进行了修改，主要集中于第189行之后。
+ * 演示 Lambertian 反射，
+ * 在4-1的基础上进行了修改，主要集中于第252行之后。
  *
  * 运行环境：Windows，Visual Studio 2019
  * EasyX 图形库版本：20200520（beta）
@@ -137,43 +137,44 @@ void initFullscreen() {
  ***  这些代码与图形学无关  ***
  */
 bool getInput(Vector3& light, Vector3& e) {
-    if (GetKeyState('W') >> 8) {
+    char c = _getch();
+    if (c == 'w') {
         light.z += 20;
     }
-    if (GetKeyState('X') >> 8) {
+    else if (c == 'x') {
         light.z -= 20;
     }
-    if (GetKeyState('A') >> 8) {
+    else if (c == 'a') {
         light.y -= 20;
     }
-    if (GetKeyState('D') >> 8) {
+    else if (c == 'd') {
         light.y += 20;
     }
-    if (GetKeyState('E') >> 8) {
+    else if (c == 'e') {
         light.x -= 20;
     }
-    if (GetKeyState('Z') >> 8) {
+    else if (c == 'z') {
         light.x += 20;
     }
-    if (GetKeyState('H') >> 8) {
+    else if (c == 'h') {
         e.y += 20;
     }
-    if (GetKeyState('F') >> 8) {
+    else if (c == 'f') {
         e.y -= 20;
     }
-    if (GetKeyState('V') >> 8) {
+    else if (c == 'v') {
         e.x += 20;
     }
-    if (GetKeyState('Y') >> 8) {
+    else if (c == 'y') {
         e.x -= 20;
     }
-    if (GetKeyState('T') >> 8) {
+    else if (c == 't') {
         e.z += 20;
     }
-    if (GetKeyState('B') >> 8) {
+    else if (c == 'b') {
         e.z -= 20;
     }
-    if (GetKeyState('L')) {
+    else {
         return false;
     }
     return true;
@@ -189,10 +190,10 @@ int main() {
         color(0.25, 0.5, 0.25);
     Vector3 light(100, 100, 100);
     Surface* s[4] = {
-        new Triangle(o, b, a, Vector3(0, 0, 1)),
-        new Triangle(o, c, b, Vector3(1, 0, 0)),
-        new Triangle(a, c, o, Vector3(0, 1, 0)),
-        new Triangle(a, b, c, Vector3(1, 1, 1))
+        new Triangle(o, b, a, color),
+        new Triangle(o, c, b, color),
+        new Triangle(a, c, o, color),
+        new Triangle(a, b, c, color)
     };
     // ** 要注意点的顺序，这影响法向量的方向 **
 
@@ -261,7 +262,7 @@ int main() {
                         (int)rgb.z);
                 }
                 else {
-                    pImg[index] = RGB(64, 128, 64);
+                    pImg[index] = RGB(64, 64, 64);
                 }
             }
         }
