@@ -41,7 +41,7 @@ public:
         float t2,
         float& rec) = 0;
 
-    virtual Vector3 getNormal() = 0;
+    virtual Vector3 getNormal(Vector3) = 0;
 };
 
 // 考虑实现球和三角形两个子类；其他几何对象一般可看作若干三角形的拼接。
@@ -63,7 +63,7 @@ public:
 
     //求三角形的法向量
     //右手四指弯曲依次通过p1, p2, p3，大拇指所指方向即为法向量方向。
-    virtual Vector3 getNormal() {
+    virtual Vector3 getNormal(Vector3) {
         return normal;
     }
     /*
@@ -82,7 +82,7 @@ public:
         float t1,
         float t2,
         float& rec) {
-        //使用光线与三角形求交公式判断(参见虎书第四版79页)；
+        //使用光线与三角形求交公式判断，
         //为了提高效率使用了几个中间变量。
         assert(t2 > t1);
         float a = p1.x - p2.x,
@@ -187,9 +187,9 @@ int main() {
         a(100, 0, 0),
         b(0, 100, 0),
         c(0, 0, 100),
-        color(0.25, 0.5, 0.25);
-    Vector3 light(100, 100, 100);
-    Surface* s[4] = {
+        color(0.5, 1, 0.5);
+    Vector3 light(100, -40, 100);
+    Triangle* s[4] = {
         new Triangle(o, b, a, color),
         new Triangle(o, c, b, color),
         new Triangle(a, c, o, color),
@@ -253,7 +253,7 @@ int main() {
                 Vector3 l = light - p;
                 l.normalize();
                 if (hitObj != nullptr) {
-                    Vector3 n = hitObj->getNormal();
+                    Vector3 n = hitObj->getNormal(p);
                     float Lambertian = max(0, n * l);
                     Vector3 rgb = hitObj->diffuse * 255 * Lambertian;
                     pImg[index] = RGB(
@@ -262,7 +262,7 @@ int main() {
                         (int)rgb.z);
                 }
                 else {
-                    pImg[index] = RGB(64, 64, 64);
+                    pImg[index] = RGB(0, 0, 0);
                 }
             }
         }

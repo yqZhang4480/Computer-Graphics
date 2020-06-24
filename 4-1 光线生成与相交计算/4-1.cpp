@@ -130,7 +130,7 @@ int main() {
             b(0, 100, 0),
             c(0, 0, 100),
             color(0.25, 0.5, 0.25);
-    Surface* s[4] = {
+    Triangle* s[4] = {
         new Triangle(o, a, b, Vector3(0.75, 0.75, 0.5)),
         new Triangle(o, b, c, Vector3(0.75, 0.75, 0.5)),
         new Triangle(o, c, a, Vector3(0.75, 0.75, 0.5)),
