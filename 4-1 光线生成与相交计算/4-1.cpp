@@ -130,7 +130,6 @@ void initFullscreen() {
 
 int main() {
     initFullscreen();
-    BeginBatchDraw();
     Vector3 o(0, 0, 0),
             a(100, 0, 0),
             b(0, 100, 0),
@@ -207,7 +206,6 @@ int main() {
         }
     }
 
-    FlushBatchDraw();
     _getch();
     delete s[0], s[1], s[2], s[3];
     s[0] = s[1] = s[2] = s[3] = nullptr;

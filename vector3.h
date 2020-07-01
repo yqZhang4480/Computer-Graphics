@@ -19,11 +19,11 @@
 class Vector3 {
 public:
     float x, y, z;
-    Vector3() {
-        this->all(0.0);
-    }
+    Vector3() : x(0.0), y(0.0), z(0.0) {}
     Vector3(float x, float y, float z)
         : x(x), y(y), z(z) {}
+    Vector3(float xyz)
+        : x(xyz), y(xyz), z(xyz) {}
     ~Vector3() {}
 
     // 将向量设为指定值
@@ -117,6 +117,11 @@ Vector3 v3Cross(const Vector3& v1, const Vector3& v2) {
         v1.z * v2.x - v1.x * v2.z,
         v1.x * v2.y - v1.y * v2.x
     );
+}
+
+// 按位乘法
+Vector3 v3ElementwiseProduct(const Vector3& v1, const Vector3& v2) {
+    return Vector3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
 }
 
 // 向量距离

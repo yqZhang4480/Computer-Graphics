@@ -8,14 +8,13 @@
 #include <conio.h>
 #endif // !_CONIO_H_
 
-#include "../vector3.h"
+#include "../gemobj.h"
 
 /**
  * 4    光线追踪
- * 4-2  Lambertian 反射
+ * 4-3  Blinn-Phong 模型
  *
- * 演示 Lambertian 反射，
- * 在4-1的基础上进行了修改，主要集中于第252行之后。
+ * 实现Blinn-Phong 光照模型。
  *
  * 运行环境：Windows，Visual Studio 2019
  * EasyX 图形库版本：20200520（beta）
@@ -25,101 +24,6 @@
  *
  * Last Edit: 2020/07/01
  */
-
- //几何对象的父类
-class Surface {
-public:
-    //材质漫反射系数，向量的三个值分别对应RGB通道
-    Vector3 diffuse;
-
-    Surface() {}
-    ~Surface() {}
-
-    virtual bool hit(const Vector3& ve,
-        const Vector3& vd,
-        float t1,
-        float t2,
-        float& rec) = 0;
-
-    virtual Vector3 getNormal(Vector3) = 0;
-};
-
-// 考虑实现球和三角形两个子类；其他几何对象一般可看作若干三角形的拼接。
-
-//三角形类
-class Triangle : public Surface {
-public:
-    //三角形的三个顶点
-    Vector3 p1, p2, p3;
-    Vector3 normal;
-
-    Triangle() {}
-    Triangle(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 diffuse)
-        : p1(p1), p2(p2), p3(p3) {
-        this->diffuse = diffuse;
-        normal = v3Cross(p2 - p1, p3 - p1);
-        normal.normalize();
-    }
-
-    //求三角形的法向量
-    //右手四指弯曲依次通过p1, p2, p3，大拇指所指方向即为法向量方向。
-    virtual Vector3 getNormal(Vector3) {
-        return normal;
-    }
-    /**
-     * 判断光线与三角形是否相交。
-     * 
-     * @param      //交点可表示为ve+t*vd
-     * @param[in]  Vector3& ve 摄像机位置
-     * @param[in]  Vector3& vd 光线方向，由交点指向摄像机
-     * @param[in]  float t1, t2 t的范围
-     * @param[out] float& rec 用此变量保存相交时t的值
-     *
-     * @return bool 是否相交
-     */
-    virtual bool hit(const Vector3& ve,
-        const Vector3& vd,
-        float t1,
-        float t2,
-        float& rec) {
-        //使用光线与三角形求交公式判断，
-        //为了提高效率使用了几个中间变量。
-        assert(t2 > t1);
-        float a = p1.x - p2.x,
-            b = p1.y - p2.y,
-            c = p1.z - p2.z,
-            d = p1.x - p3.x,
-            e = p1.y - p3.y,
-            f = p1.z - p3.z,
-            g = vd.x,
-            h = vd.y,
-            i = vd.z,
-            j = p1.x - ve.x,
-            k = p1.y - ve.y,
-            l = p1.z - ve.z;
-        float ei_hf = e * i - h * f,
-            gf_di = g * f - d * i,
-            dh_eg = d * h - e * g,
-            ak_jb = a * k - j * b,
-            jc_al = j * c - a * l,
-            bl_kc = b * l - k * c;
-        float M = a * ei_hf + b * gf_di + c * dh_eg;
-
-        rec = - (f * ak_jb + e * jc_al + d * bl_kc) / M;
-        if (rec > t2 || rec < t1) {
-            return false;
-        }
-        float beta = (j * ei_hf + k * gf_di + l * dh_eg) / M;
-        if (beta < 0 || beta > 1) {
-            return false;
-        }
-        float gamma = (i * ak_jb + h * jc_al + g * bl_kc) / M;
-        if (gamma < 0 || gamma > 1 - beta) {
-            return false;
-        }
-        return true;
-    }
-};
 
 /*
  initFullscreen  初始化全屏绘图窗口
@@ -193,13 +97,16 @@ int main() {
         a(100, 0, 0),
         b(0, 100, 0),
         c(0, 0, 100),
-        color(0.5, 1, 0.5);
-    Vector3 light(100, -40, 100);
-    Triangle* s[4] = {
-        new Triangle(o, b, a, color),
-        new Triangle(o, c, b, color),
-        new Triangle(a, c, o, color),
-        new Triangle(a, b, c, color)
+        diffuse(0.5, 1, 0.5),
+        specular(1, 1, 1);
+    Light light = {
+        Vector3(100, -40, 100), Vector3(1, 1, 1)
+    };
+    Surface* s[4] = {
+        new Triangle(o, b, a, diffuse, specular, 10),
+        new Triangle(o, c, b, diffuse, specular, 10),
+        new Triangle(a, c, o, diffuse, specular, 10),
+        new Triangle(a, b, c, diffuse, specular, 10)
     };
     // ** 要注意点的顺序，这影响法向量的方向 **
 
@@ -256,19 +163,25 @@ int main() {
 
                 // 第三步，在该像素显示几何对象的颜色。
                 Vector3 p = e + d * t; // 点的位置
-                Vector3 l = light - p;
+                Vector3 l = light.position - p;
                 l.normalize();
+                Vector3 h = l - d;
+                h.normalize();
                 if (hitObj != nullptr) {
                     Vector3 n = hitObj->getNormal(p);
                     float Lambertian = max(0, n * l);
-                    int r = hitObj->diffuse.x * 255 * Lambertian,
-                        g = hitObj->diffuse.y * 255 * Lambertian,
-                        b = hitObj->diffuse.z * 255 * Lambertian;
-                    assert(r > 0 && g > 0 && b > 0);
+                    float Specular = pow(max(0, n * h), hitObj->phongExponent);
+                    Vector3 color =
+                        v3ElementwiseProduct(hitObj->diffuse, light.intensity) * Lambertian * 255 /*+
+                        v3ElementwiseProduct(hitObj->specular, light.intensity) * Specular * 255*/;
+                    int r = color.x,
+                        g = color.y,
+                        b = color.z;
+                    assert(r >= 0 && g >= 0 && b >= 0);
                     if (r > 255) {
                         r = 255;
                     }
-                    if (g > 255) { 
+                    if (g > 255) {
                         g = 255;
                     }
                     if (b > 255) {
@@ -283,11 +196,21 @@ int main() {
         }
         wchar_t echo[40];
         wsprintf(echo, L"LIGHT( %d, %d, %d )",
-            (int)light.x, (int)light.y, (int)light.z);
+            (int)light.position.x, 
+            (int)light.position.y, 
+            (int)light.position.z
+        );
         settextstyle(20, 0, L"Arial");
-        outtextxy(200, 200, echo);
+        outtextxy(200, 600, echo);
+        wsprintf(echo, L"EYE  ( %d, %d, %d )",
+            (int)e.x,
+            (int)e.y,
+            (int)e.z
+        );
+        settextstyle(20, 0, L"Arial");
+        outtextxy(200, 620, echo);
         FlushBatchDraw();
-    } while (getInput(light, e));
+    } while (getInput(light.position, e));
 
     delete s[0], s[1], s[2], s[3];
     s[0] = s[1] = s[2] = s[3] = nullptr;

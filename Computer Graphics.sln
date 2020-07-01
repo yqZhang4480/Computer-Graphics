@@ -9,10 +9,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-1 光线生成与相交�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1F81239-69B0-42D6-8422-1F3ED49E4807}"
 	ProjectSection(SolutionItems) = preProject
+		gemobj.h = gemobj.h
 		vector3.h = vector3.h
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-2 Lambertian 反射", "4-2 Lambertian 反射\4-2 Lambertian 反射.vcxproj", "{7CB4361D-EB4B-43C4-AC41-294DE974BA23}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-3 Blinn-Phong 模型", "4-3 Blinn-Phong 模型\4-3 Blinn-Phong 模型.vcxproj", "{BADF4767-23D4-4818-B19B-555E13CE56FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +41,14 @@ Global
 		{7CB4361D-EB4B-43C4-AC41-294DE974BA23}.Release|x64.Build.0 = Release|x64
 		{7CB4361D-EB4B-43C4-AC41-294DE974BA23}.Release|x86.ActiveCfg = Release|Win32
 		{7CB4361D-EB4B-43C4-AC41-294DE974BA23}.Release|x86.Build.0 = Release|Win32
+		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Debug|x64.ActiveCfg = Debug|x64
+		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Debug|x64.Build.0 = Debug|x64
+		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Debug|x86.ActiveCfg = Debug|Win32
+		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Debug|x86.Build.0 = Debug|Win32
+		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Release|x64.ActiveCfg = Release|x64
+		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Release|x64.Build.0 = Release|x64
+		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Release|x86.ActiveCfg = Release|Win32
+		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
