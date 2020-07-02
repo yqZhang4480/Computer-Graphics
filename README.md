@@ -22,11 +22,13 @@ Chapter 4 - Ray Tracing
 >4-2 Lambertian 反射
 >>演示 Lambertian 反射。<br>
 >>修改4-2.cpp的192-204行，可以改变几何对象的属性。<br>
+>>修改<code>e_to_ScreenCenter</code>可改变视角方向。<br>
 >>几何对象必须是一个数组，在程序中定义为<code>Surface* s[]</code>。<br>
 >>可通过键盘进行交互，详见4-2.cpp：145-187。
 >
 >4-3 Blinn-Phong 模型
 >>实现 Blinn-Phong 光照模型。<br>
 >>修改4-3.cpp：96-130，可以改变几何对象的属性。<br>
+>>修改<code>e_to_ScreenCenter</code>可改变视角方向。<br>
 >>几何对象必须是一个数组，在程序中定义为<code>Surface* s[]</code>。<br>
 >>可通过键盘进行交互，详见4-3.cpp：49-91。
