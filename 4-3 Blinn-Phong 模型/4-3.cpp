@@ -94,19 +94,38 @@ int main() {
     initFullscreen();
     BeginBatchDraw();
     Vector3 o(0, 0, 0),
-        a(100, 0, 0),
+        /*a(100, 0, 0),
         b(0, 100, 0),
         c(0, 0, 100),
         diffuse(0.5, 1, 0.5),
-        specular(1, 1, 1);
+        specular(1, 1, 1);*/
+        a(0, 50, 0),
+        b(100, 50, 0),
+        c(100, 0, 0),
+        o_(10, 10, 30),
+        a_(10, 40, 30),
+        b_(90, 40, 30),
+        c_(90, 10, 30),
+        diffuse(0.949, 0.753, 0.337),
+        specular(0.949, 0.753, 0.337);
     Light light = {
         Vector3(100, -40, 100), Vector3(1, 1, 1)
     };
-    Surface* s[4] = {
+    /*Surface* s[4] = {
         new Triangle(o, b, a, diffuse, specular, 10),
         new Triangle(o, c, b, diffuse, specular, 10),
         new Triangle(a, c, o, diffuse, specular, 10),
         new Triangle(a, b, c, diffuse, specular, 10)
+    };*/
+    Surface* s[8] = {
+        new Triangle(o_, c_, a_, diffuse, specular, 5),
+        new Triangle(a_, c_, b_, diffuse, specular, 5),
+        new Triangle(o_, o, c, diffuse, specular, 5),
+        new Triangle(c, c_, o_, diffuse, specular, 5),
+        new Triangle(b_, c_, c, diffuse, specular, 5),
+        new Triangle(c, b, b_, diffuse, specular, 5),
+        new Triangle(a, a_, b_, diffuse, specular, 5),
+        new Triangle(b_, b, a, diffuse, specular, 5)
     };
     // ** 要注意点的顺序，这影响法向量的方向 **
 
@@ -172,8 +191,8 @@ int main() {
                     float Lambertian = max(0, n * l);
                     float Specular = pow(max(0, n * h), hitObj->phongExponent);
                     Vector3 color =
-                        v3ElementwiseProduct(hitObj->diffuse, light.intensity) * Lambertian * 255 /*+
-                        v3ElementwiseProduct(hitObj->specular, light.intensity) * Specular * 255*/;
+                        v3ElementwiseProduct(hitObj->diffuse, light.intensity) * Lambertian * 255 +
+                        v3ElementwiseProduct(hitObj->specular, light.intensity) * Specular * 255;
                     int r = color.x,
                         g = color.y,
                         b = color.z;
@@ -212,7 +231,9 @@ int main() {
         FlushBatchDraw();
     } while (getInput(light.position, e));
 
-    delete s[0], s[1], s[2], s[3];
-    s[0] = s[1] = s[2] = s[3] = nullptr;
+    for (Surface* o : s) {
+        delete o;
+        o = nullptr;
+    }
     return 0;
 }

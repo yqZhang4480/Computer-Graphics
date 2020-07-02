@@ -159,14 +159,17 @@ public:
      * @param radius 半径
      * @param diffuse 漫反射颜色，向量的三个值分别对应RGB通道
      * @param specular 镜面反射颜色，向量的三个值分别对应RGB通道
+     * @param phongExponent 材质光泽度
      */
     Sphere(const Vector3& center,
         float radius,
         const Vector3& diffuse,
-        const Vector3& specular
+        const Vector3& specular,
+        float          phongExponent
     ) : center(center), radius(radius) {
         this->diffuse = diffuse;
         this->specular = specular;
+        this->phongExponent = phongExponent;
     }
 
     /**
@@ -175,7 +178,7 @@ public:
      *
      * @param p 球面上一点
      */
-    virtual Vector3 getNormal(const Vector3& p) {
+    virtual Vector3 getNormal(const Vector3 p) {
         Vector3 normal = p - center;
         normal.normalize();
         return normal;
