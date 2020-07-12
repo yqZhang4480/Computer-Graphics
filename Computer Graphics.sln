@@ -9,13 +9,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-1 光线生成与相交�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1F81239-69B0-42D6-8422-1F3ED49E4807}"
 	ProjectSection(SolutionItems) = preProject
-		gemobj.h = gemobj.h
+		vector2.h = vector2.h
 		vector3.h = vector3.h
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-2 Lambertian 反射", "4-2 Lambertian 反射\4-2 Lambertian 反射.vcxproj", "{7CB4361D-EB4B-43C4-AC41-294DE974BA23}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-3 Blinn-Phong 模型", "4-3 Blinn-Phong 模型\4-3 Blinn-Phong 模型.vcxproj", "{BADF4767-23D4-4818-B19B-555E13CE56FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter 8 - The Graphics Pipeline", "Chapter 8 - The Graphics Pipeline", "{0873F334-EE76-499D-8BB5-3F49D4288791}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8-1 直线的光栅化绘制", "8-1 直线的光栅化绘制\8-1 直线的光栅化绘制.vcxproj", "{C52AF525-42C9-4477-BC3C-8559D41E966B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,14 @@ Global
 		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Release|x64.Build.0 = Release|x64
 		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Release|x86.ActiveCfg = Release|Win32
 		{BADF4767-23D4-4818-B19B-555E13CE56FC}.Release|x86.Build.0 = Release|Win32
+		{C52AF525-42C9-4477-BC3C-8559D41E966B}.Debug|x64.ActiveCfg = Debug|x64
+		{C52AF525-42C9-4477-BC3C-8559D41E966B}.Debug|x64.Build.0 = Debug|x64
+		{C52AF525-42C9-4477-BC3C-8559D41E966B}.Debug|x86.ActiveCfg = Debug|Win32
+		{C52AF525-42C9-4477-BC3C-8559D41E966B}.Debug|x86.Build.0 = Debug|Win32
+		{C52AF525-42C9-4477-BC3C-8559D41E966B}.Release|x64.ActiveCfg = Release|x64
+		{C52AF525-42C9-4477-BC3C-8559D41E966B}.Release|x64.Build.0 = Release|x64
+		{C52AF525-42C9-4477-BC3C-8559D41E966B}.Release|x86.ActiveCfg = Release|Win32
+		{C52AF525-42C9-4477-BC3C-8559D41E966B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +68,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4C4FAF6C-A000-4167-9DDF-0A8DB4C54F59} = {3FF3A37C-916B-4A44-8BF0-38DD419C783F}
 		{7CB4361D-EB4B-43C4-AC41-294DE974BA23} = {3FF3A37C-916B-4A44-8BF0-38DD419C783F}
+		{BADF4767-23D4-4818-B19B-555E13CE56FC} = {3FF3A37C-916B-4A44-8BF0-38DD419C783F}
+		{C52AF525-42C9-4477-BC3C-8559D41E966B} = {0873F334-EE76-499D-8BB5-3F49D4288791}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E80CEE16-EADE-4B3D-98EC-E86D32F72906}

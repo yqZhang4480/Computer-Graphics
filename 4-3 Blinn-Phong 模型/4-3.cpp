@@ -8,7 +8,7 @@
 #include <conio.h>
 #endif // !_CONIO_H_
 
-#include "../gemobj.h"
+#include "gemobj.h"
 
 /**
  * 4    ¹âÏß×·×Ù
