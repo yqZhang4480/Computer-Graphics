@@ -12,9 +12,9 @@
 
 /**
  * 8    图形流水线
- * 8-1  直线的光栅化绘制
+ * 8-1  二维图元的光栅化绘制
  *
- * 使用光栅化方法绘制带有线型线宽属性的直线。
+ * 使用光栅化方法绘制直线、三角形等。
  *
  * 运行环境：Windows，Visual Studio 2019
  * EasyX 图形库版本：20200520（beta）
@@ -46,11 +46,6 @@ int main()
     initFullscreen();
     Canva c;
     srand(0);
-    Vector3 color[3] = {
-        Vector3(0xea / 255.0, 0x86 / 255.0, 0xcc / 255.0),
-        Vector3(0xe5 / 255.0, 0xe5 / 255.0, 0xcb / 255.0),
-        Vector3(0xc0 / 255.0, 0xe4 / 255.0, 0xc8 / 255.0)
-    };
     for (int i = 0; i < 10000; i++)
     {
         int x = rand() % c.width,
@@ -59,9 +54,41 @@ int main()
         {
             continue;
         }
-        Gemobj&& g = Line2D(Point2D(x, y, color[rand() % 3]), Point2D(x + 200, y - 124, color[rand() % 3]));
+        Gemobj&& g = Line2D(
+            Point2D(x, y, Vector3(0)),
+            Point2D(x + 200,
+                    y - 124,
+                    Vector3(rand() / 32768.0,
+                            rand() / 32768.0,
+                            rand() / 32768.0))
+        );
         c.draw(g);
     }
     saveimage(L"line10000.png");
+    _getch();
+    cleardevice();
+    srand(0);
+    for (int i = 0; i < 1000; i++)
+    {
+        Gemobj&& g = Triangle2D(
+            Point2D(rand()%c.width,
+                    rand()%c.height,
+                    Vector3(rand() / 32768.0,
+                            rand() / 32768.0,
+                            rand() / 32768.0)),
+            Point2D(rand()%c.width,
+                    rand()%c.height,
+                    Vector3(rand() / 32768.0,
+                            rand() / 32768.0,
+                            rand() / 32768.0)),
+            Point2D(rand()%c.width,
+                    rand()%c.height,
+                    Vector3(rand() / 32768.0,
+                            rand() / 32768.0,
+                            rand() / 32768.0))
+        );
+        c.draw(g);
+    }
+    saveimage(L"triangle1000.png");
     _getch();
 }
