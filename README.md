@@ -32,3 +32,7 @@ Chapter 4 - Ray Tracing
 >>修改<code>e_to_ScreenCenter</code>可改变视角方向。<br>
 >>几何对象必须是一个数组，在程序中定义为<code>Surface* s[]</code>。<br>
 >>可通过键盘进行交互，详见4-3.cpp：49-91。
+
+Chapter 8 - The Graphics Pipeline
+>8-1 二维图元的光栅化绘制
+>>使用光栅化方法绘制直线、三角形等。
