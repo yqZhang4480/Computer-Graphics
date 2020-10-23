@@ -1,6 +1,7 @@
 Computer Graphics
 =======
-此repo包含计算机图形学的一些练习代码。<br>
+此 repo 包含计算机图形学的一些练习代码。<br>
+欢迎关注我的知乎专栏 https://www.zhihu.com/column/c_1258117348499869696 ，与本 repo 同步更新~
 
 开发环境
 -------
@@ -36,3 +37,6 @@ Chapter 4 - Ray Tracing
 Chapter 8 - The Graphics Pipeline
 >8-1 二维图元的光栅化绘制
 >>使用光栅化方法绘制直线、三角形等。
+>
+>8-2 MVP 矩阵变换
+>>尝试对三维三角形进行 MVP 变换。
