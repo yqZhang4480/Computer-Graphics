@@ -25,11 +25,11 @@
  * Last Edit: 2020/07/01
  */
 
-/*
- initFullscreen  初始化全屏绘图窗口
+ /*
+  initFullscreen  初始化全屏绘图窗口
 
- ***  这些代码与图形学无关  ***
- */
+  ***  这些代码与图形学无关  ***
+  */
 void initFullscreen() {
     int rW = GetSystemMetrics(SM_CXSCREEN); // 屏幕宽度 像素
     int rH = GetSystemMetrics(SM_CYSCREEN); // 屏幕高度 像素
@@ -215,8 +215,8 @@ int main() {
         }
         wchar_t echo[40];
         wsprintf(echo, L"LIGHT( %d, %d, %d )",
-            (int)light.position.x, 
-            (int)light.position.y, 
+            (int)light.position.x,
+            (int)light.position.y,
             (int)light.position.z
         );
         settextstyle(20, 0, L"Arial");
