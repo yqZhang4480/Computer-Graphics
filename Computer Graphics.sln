@@ -9,6 +9,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-1 光线生成与相交�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1F81239-69B0-42D6-8422-1F3ED49E4807}"
 	ProjectSection(SolutionItems) = preProject
+		canvas.h = canvas.h
+		models.h = models.h
+		mouse.h = mouse.h
+		shader.h = shader.h
 		vector2.h = vector2.h
 		vector3.h = vector3.h
 	EndProjectSection
@@ -22,6 +26,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8-1 二维图元的光栅化绘制", "8-1 二维图元的光栅化绘制\8-1 二维图元的光栅化绘制.vcxproj", "{C52AF525-42C9-4477-BC3C-8559D41E966B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8-2 MVP 矩阵变换", "8-2 MVP 矩阵变换\8-2 MVP 矩阵变换.vcxproj", "{EBF46C15-4781-40F7-B9A6-D667FBF581DD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8-3 三维图元的光栅化绘制", "8-3 三维图元的光栅化绘制\8-3 三维图元的光栅化绘制.vcxproj", "{AA26663A-1DE6-4B67-8002-125F7DA1E292}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +77,14 @@ Global
 		{EBF46C15-4781-40F7-B9A6-D667FBF581DD}.Release|x64.Build.0 = Release|x64
 		{EBF46C15-4781-40F7-B9A6-D667FBF581DD}.Release|x86.ActiveCfg = Release|Win32
 		{EBF46C15-4781-40F7-B9A6-D667FBF581DD}.Release|x86.Build.0 = Release|Win32
+		{AA26663A-1DE6-4B67-8002-125F7DA1E292}.Debug|x64.ActiveCfg = Debug|x64
+		{AA26663A-1DE6-4B67-8002-125F7DA1E292}.Debug|x64.Build.0 = Debug|x64
+		{AA26663A-1DE6-4B67-8002-125F7DA1E292}.Debug|x86.ActiveCfg = Debug|Win32
+		{AA26663A-1DE6-4B67-8002-125F7DA1E292}.Debug|x86.Build.0 = Debug|Win32
+		{AA26663A-1DE6-4B67-8002-125F7DA1E292}.Release|x64.ActiveCfg = Release|x64
+		{AA26663A-1DE6-4B67-8002-125F7DA1E292}.Release|x64.Build.0 = Release|x64
+		{AA26663A-1DE6-4B67-8002-125F7DA1E292}.Release|x86.ActiveCfg = Release|Win32
+		{AA26663A-1DE6-4B67-8002-125F7DA1E292}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +95,7 @@ Global
 		{BADF4767-23D4-4818-B19B-555E13CE56FC} = {3FF3A37C-916B-4A44-8BF0-38DD419C783F}
 		{C52AF525-42C9-4477-BC3C-8559D41E966B} = {0873F334-EE76-499D-8BB5-3F49D4288791}
 		{EBF46C15-4781-40F7-B9A6-D667FBF581DD} = {0873F334-EE76-499D-8BB5-3F49D4288791}
+		{AA26663A-1DE6-4B67-8002-125F7DA1E292} = {0873F334-EE76-499D-8BB5-3F49D4288791}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E80CEE16-EADE-4B3D-98EC-E86D32F72906}

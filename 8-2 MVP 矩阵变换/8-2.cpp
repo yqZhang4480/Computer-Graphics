@@ -25,7 +25,7 @@
  * ****  若编译后无响应，请尝试重启设备。  ****
  * ****  若出现编译错误，请确保已正确安装EasyX图形库。  ****
  *
- * Last Edit: 2020/10/18
+ * Last Edit: 2020/10/23
  */
 
  /*
@@ -50,7 +50,6 @@ class TriangleTEST : public Triangle3D
 {
 public:
 
-    TriangleTEST() {}
     TriangleTEST(const Triangle3D& t)
     {
         this->v[0] = t.v[0];
@@ -174,8 +173,8 @@ int main()
     #pragma endregion
     #pragma region projection transform
     Matrix4f M_pres, M_orth;
-    int n = -60,
-        f = -100;
+    int n = -163,
+        f = -1000;
     M_pres << 
         n, 0, 0, 0,
         0, n, 0, 0,
